@@ -1,16 +1,9 @@
 FROM ghcr.io/ptero-eggs/games:source
 USER root
-ARG VJOLT_VERSION=0.20
 RUN apt-get update \
  && apt-get install -y --no-install-recommends git openssh-client ca-certificates unzip \
  && apt-get clean \
- && mkdir -p /opt/vjolt/bin /opt/vjolt64/bin/linux64 /opt/vjolt23/bin /opt/vjolt23_64/bin \
- && curl -fsSL -o /tmp/vjolt32.zip "https://github.com/misyltoad/VPhysics-Jolt/releases/download/${VJOLT_VERSION}/vphysics_jolt_${VJOLT_VERSION}_gmod_linux32.zip" \
- && unzip -q /tmp/vjolt32.zip -d /tmp/vjolt32 \
- && cp /tmp/vjolt32/bin/*.so /opt/vjolt/bin/ \
- && curl -fsSL -o /tmp/vjolt64.zip "https://github.com/misyltoad/VPhysics-Jolt/releases/download/${VJOLT_VERSION}/vphysics_jolt_${VJOLT_VERSION}_gmod_linux64.zip" \
- && unzip -q /tmp/vjolt64.zip -d /tmp/vjolt64 \
- && cp /tmp/vjolt64/bin/linux64/*.so /opt/vjolt64/bin/linux64/ \
+ && mkdir -p /opt/vjolt23/bin /opt/vjolt23_64/bin \
  && curl -fsSL -o /tmp/vjolt23.zip "https://github.com/RaphaelIT7/VPhysics-Jolt/releases/download/Version0.23/vphysics_jolt_gmod_dedicated_linux32.zip" \
  && echo "fd25369059325b7414102588823b27906b3cc373a22eac1ece78ecc0dba54e20  /tmp/vjolt23.zip" | sha256sum -c - \
  && unzip -q /tmp/vjolt23.zip -d /tmp/vjolt23 \
